@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NativeLayer — Make Your Website Invisible to AI</title>
+<meta name="description" content="Generate a complete AI-native layer for any website in 60 seconds. Cut AI agent token costs by 84%."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Syne:wght@400;500;600&family=Syne+Mono&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#0e0e0e;--paper:#f5f0e8;--cream:#ede7d7;--accent:#c8491a;--muted:#8a7f72;--green:#2a6b4a;--border:rgba(14,14,14,.12);--mono:'Syne Mono',monospace;--sans:'Syne',sans-serif;--serif:'Playfair Display',serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:128px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(245,240,232,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.logo{font-family:var(--mono);font-size:15px;color:var(--ink);letter-spacing:-.02em}
+.logo em{color:var(--accent);font-style:normal}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:.04em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink)!important;color:var(--paper)!important;padding:9px 20px;border-radius:2px;font-size:12px!important;letter-spacing:.06em!important}
+.nav-cta:hover{background:var(--accent)!important}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 48px 80px;text-align:center;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)}
+.hero-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(200,73,26,.3);padding:5px 14px;border-radius:20px;margin-bottom:36px;display:inline-block;animation:fadeUp .6s ease both}
+h1{font-family:var(--serif);font-size:clamp(48px,8vw,96px);font-weight:700;line-height:1.0;letter-spacing:-.03em;color:var(--ink);max-width:900px;margin-bottom:28px;animation:fadeUp .6s .1s ease both}
+h1 span{color:var(--accent);font-style:italic}
+.hero-sub{font-size:clamp(16px,2vw,19px);color:var(--muted);line-height:1.7;max-width:560px;margin:0 auto 56px;animation:fadeUp .6s .2s ease both}
+.demo-wrap{width:100%;max-width:640px;animation:fadeUp .6s .3s ease both}
+.demo-box{background:var(--ink);border-radius:4px;overflow:hidden;box-shadow:0 32px 80px rgba(14,14,14,.25)}
+.demo-bar{background:#1a1a1a;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.demo-dots{display:flex;gap:6px}
+.demo-dots span{width:10px;height:10px;border-radius:50%}
+.demo-dots span:nth-child(1){background:#ff5f57}
+.demo-dots span:nth-child(2){background:#febc2e}
+.demo-dots span:nth-child(3){background:#28c840}
+.demo-url-bar{flex:1;background:rgba(255,255,255,.06);border-radius:3px;padding:5px 12px;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.4);text-align:center}
+.demo-input-row{display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.06);padding:16px 20px;gap:12px}
+.demo-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:12px 16px;font-family:var(--mono);font-size:13px;color:#fff;outline:none;transition:border-color .2s}
+.demo-input:focus{border-color:rgba(200,73,26,.6)}
+.demo-input::placeholder{color:rgba(255,255,255,.25)}
+.demo-btn{background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:600;padding:12px 24px;border-radius:3px;white-space:nowrap;letter-spacing:.02em;transition:background .15s,transform .1s}
+.demo-btn:hover{background:#a83a12}
+.demo-btn:active{transform:scale(.97)}
+.demo-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.demo-output{padding:20px;min-height:280px;display:flex;flex-direction:column}
+.demo-placeholder{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;opacity:.25}
+.demo-placeholder-icon{font-family:var(--mono);font-size:32px;color:#fff}
+.demo-placeholder-text{font-family:var(--mono);font-size:11px;color:#fff;letter-spacing:.08em}
+.demo-tabs{display:flex;gap:0;margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,.08)}
+.demo-tab{font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:8px 14px;background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;text-transform:uppercase}
+.demo-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.demo-tab:hover:not(.active){color:rgba(255,255,255,.7)}
+.demo-code{font-family:var(--mono);font-size:11px;line-height:1.9;color:rgba(255,255,255,.6);white-space:pre-wrap;word-break:break-word;flex:1;max-height:240px;overflow-y:auto}
+.demo-stats{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.06);margin-top:16px}
+.demo-stat{flex:1;padding:12px 16px;text-align:center;border-right:1px solid rgba(255,255,255,.06)}
+.demo-stat:last-child{border-right:none}
+.demo-stat-num{font-family:var(--mono);font-size:18px;color:#4ade80;font-weight:500}
+.demo-stat-label{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.3);margin-top:2px;letter-spacing:.06em;text-transform:uppercase}
+.demo-progress{padding:24px 20px;display:flex;flex-direction:column;align-items:center;gap:16px;flex:1;justify-content:center}
+.demo-spinner{width:24px;height:24px;border:2px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+.demo-step{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.5)}
+.demo-prog-track{width:200px;height:2px;background:rgba(255,255,255,.08);border-radius:1px}
+.demo-prog-fill{height:100%;background:var(--accent);border-radius:1px;transition:width .5s ease}
+.demo-error{padding:24px 20px;font-family:var(--mono);font-size:12px;color:rgba(248,113,113,.8);text-align:center;flex:1;display:flex;align-items:center;justify-content:center}
+.proof-strip{background:var(--ink);color:var(--paper);padding:20px 48px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
+.proof-item{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:rgba(245,240,232,.5);text-transform:uppercase}
+.proof-num{font-size:20px;font-weight:500;color:var(--paper);font-family:var(--serif)}
+section{padding:100px 48px}
+.section-tag{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block}
+h2{font-family:var(--serif);font-size:clamp(36px,5vw,56px);font-weight:700;line-height:1.1;letter-spacing:-.02em;color:var(--ink);max-width:640px;margin-bottom:20px}
+.section-sub{font-size:17px;color:var(--muted);line-height:1.7;max-width:520px;margin-bottom:56px}
+.problem-section{background:var(--cream)}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-top:48px}
+.problem-card{background:var(--cream);padding:36px 32px}
+.problem-card-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.problem-num{font-family:var(--serif);font-size:52px;font-weight:700;line-height:1;letter-spacing:-.03em;margin-bottom:10px}
+.problem-num.bad{color:var(--accent)}
+.problem-num.good{color:var(--green)}
+.problem-card p{font-size:14px;color:var(--muted);line-height:1.6}
+.steps{display:flex;flex-direction:column;gap:0;max-width:700px;margin-top:48px}
+.step{display:flex;gap:32px;padding:32px 0;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:none}
+.step-num{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.06em;flex-shrink:0;padding-top:4px;width:28px}
+.step-content h3{font-family:var(--sans);font-size:17px;font-weight:600;margin-bottom:8px}
+.step-content p{font-size:14px;color:var(--muted);line-height:1.7}
+.step-tag{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px}
+.step-tag.live{background:rgba(42,107,74,.12);color:var(--green)}
+.step-tag.soon{background:rgba(14,14,14,.07);color:var(--muted)}
+.audience-section{background:var(--ink);color:var(--paper)}
+.audience-section h2{color:var(--paper)}
+.audience-section .section-sub{color:rgba(245,240,232,.5)}
+.audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-top:48px}
+.audience-card{background:var(--ink);padding:36px 28px;transition:background .2s}
+.audience-card:hover{background:#161616}
+.audience-icon{font-size:28px;margin-bottom:20px}
+.audience-card h3{font-family:var(--sans);font-size:17px;font-weight:600;margin-bottom:10px;color:var(--paper)}
+.audience-card p{font-size:13px;color:rgba(245,240,232,.45);line-height:1.7}
+.audience-card ul{margin-top:16px;display:flex;flex-direction:column;gap:6px}
+.audience-card ul li{font-size:12px;color:rgba(245,240,232,.5);list-style:none;padding-left:14px;position:relative}
+.audience-card ul li::before{content:'--';position:absolute;left:0;color:var(--accent)}
+.waitlist-section{background:var(--accent);color:var(--paper);text-align:center}
+.waitlist-section h2{color:var(--paper);margin:0 auto 16px}
+.waitlist-section .section-sub{color:rgba(245,240,232,.75);margin:0 auto 48px}
+.wl-name-row{display:flex;gap:12px;max-width:560px;margin:0 auto 12px;flex-wrap:wrap;justify-content:center}
+.waitlist-input{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:3px;padding:14px 18px;color:#fff;font-family:var(--sans);font-size:14px;outline:none;transition:border-color .2s;width:100%}
+.waitlist-input::placeholder{color:rgba(255,255,255,.45)}
+.waitlist-input:focus{border-color:rgba(255,255,255,.6)}
+.waitlist-form{display:flex;gap:0;max-width:480px;margin:0 auto}
+.waitlist-form .waitlist-input{border-right:none;border-radius:3px 0 0 3px}
+.waitlist-btn{background:var(--ink);color:var(--paper);border:none;padding:14px 28px;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:600;border-radius:0 3px 3px 0;white-space:nowrap;transition:background .15s;letter-spacing:.02em}
+.waitlist-btn:hover{background:#1e1e1e}
+.waitlist-btn:disabled{opacity:.6;cursor:not-allowed}
+.waitlist-note{margin-top:16px;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.04em}
+.waitlist-success{display:none;text-align:center;padding:20px}
+.waitlist-success .check{font-size:32px;margin-bottom:12px;display:block}
+.faq-list{max-width:680px;margin-top:48px}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;background:none;border:none;cursor:pointer;text-align:left;padding:24px 0;display:flex;align-items:center;justify-content:space-between;font-family:var(--sans);font-size:16px;font-weight:500;color:var(--ink);gap:16px}
+.faq-q:hover{color:var(--accent)}
+.faq-arrow{font-size:18px;color:var(--muted);flex-shrink:0;transition:transform .2s}
+.faq-item.open .faq-arrow{transform:rotate(45deg);color:var(--accent)}
+.faq-a{display:none;padding:0 0 24px;font-size:15px;color:var(--muted);line-height:1.8}
+.faq-item.open .faq-a{display:block}
+footer{background:var(--ink);color:rgba(245,240,232,.35);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:var(--mono);font-size:14px;color:var(--paper)}
+.footer-logo em{color:var(--accent);font-style:normal}
+footer p{font-family:var(--mono);font-size:11px;letter-spacing:.04em}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){nav{padding:16px 24px}.nav-links{display:none}section,.hero{padding:80px 24px}.problem-grid,.audience-grid{grid-template-columns:1fr}.waitlist-form{flex-direction:column}.waitlist-form .waitlist-input{border-right:1px solid rgba(255,255,255,.25);border-radius:3px 3px 0 0}.waitlist-btn{border-radius:0 0 3px 3px}.proof-strip{gap:24px;padding:20px 24px}footer{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><em>//</em> NativeLayer</div>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#who">Who it's for</a>
+    <a href="#faq">FAQ</a>
+    <a href="#waitlist" class="nav-cta">Join waitlist</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-tag">AI-Native Web Infrastructure</div>
+  <h1>Make your website<br/><span>invisible</span> to AI agents</h1>
+  <p class="hero-sub">AI agents are reading your website right now — inefficiently. NativeLayer generates a lightweight AI-native layer that cuts token costs by 84% and makes every AI agent understand your site perfectly. <strong style="color:var(--accent)">Try the live demo below — paste any URL and see real output in 60 seconds.</strong></p>
+  <div class="demo-wrap">
+    <div class="demo-box">
+      <div class="demo-bar">
+        <div class="demo-dots"><span></span><span></span><span></span></div>
+        <div class="demo-url-bar">&#9679; live demo — try it free, no account needed</div>
+      </div>
+      <div class="demo-input-row">
+        <input class="demo-input" id="demoUrl" placeholder="https://yourwebsite.com" type="url"/>
+        <button class="demo-btn" id="demoBtn">Try free demo &rarr;</button>
+      </div>
+      <div class="demo-output" id="demoOutput">
+        <div class="demo-placeholder">
+          <div class="demo-placeholder-icon">{ }</div>
+          <div class="demo-placeholder-text">Paste a URL above and hit Generate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="proof-strip">
+  <div class="proof-item"><span class="proof-num">84%</span> avg token reduction</div>
+  <div class="proof-item"><span class="proof-num">60s</span> to generate a full layer</div>
+  <div class="proof-item"><span class="proof-num">3</span> files, instantly deployable</div>
+  <div class="proof-item"><span class="proof-num">6,900%</span> AI agent traffic growth 2025</div>
+</div>
+
+<section class="problem-section" id="problem">
+  <div class="reveal">
+    <span class="section-tag">The Problem</span>
+    <h2>Your website was built for humans. AI agents are not humans.</h2>
+    <p class="section-sub">Every time an AI agent visits your site, it burns through thousands of tokens parsing JavaScript, CSS, and HTML noise just to find a few hundred tokens of actual content.</p>
+  </div>
+  <div class="problem-grid reveal">
+    <div class="problem-card">
+      <div class="problem-card-label">Typical webpage today</div>
+      <div class="problem-num bad">38,500</div>
+      <p>tokens an AI agent must process to read a standard HTML page — 99% of which is noise: scripts, styles, layout markup, fonts, images.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-label">With NativeLayer</div>
+      <div class="problem-num good">500</div>
+      <p>tokens to understand your entire site via a single llms.txt file that AI agents check first, before loading any pages at all.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-label">Average page size (2025)</div>
+      <div class="problem-num bad">2.86<span style="font-size:24px">MB</span></div>
+      <p>HTTP Archive 2025 median desktop page. Less than 1% of this is the text content an AI agent actually needs.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-card-label">AI agent traffic growth</div>
+      <div class="problem-num good">6,900<span style="font-size:24px">%</span></div>
+      <p>Year-over-year growth in verified AI agent web traffic in 2025. This is happening right now.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="reveal">
+    <span class="section-tag">How It Works</span>
+    <h2>Three files. Zero changes to your existing site.</h2>
+    <p class="section-sub">NativeLayer generates a parallel AI-native layer alongside your existing website. Human visitors see nothing different. AI agents instantly find exactly what they need.</p>
+  </div>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Paste your URL</h3>
+        <p>We fetch your website, analyse its content and structure, and identify all the information AI agents would want to find. No account needed to try it.</p>
+        <span class="step-tag live">Live now</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Connect your data sources</h3>
+        <p>Optionally connect your RSS feed or any JSON API endpoint. NativeLayer fetches real data and weaves it into the generated layer so AI agents see your actual content.</p>
+        <span class="step-tag live">RSS + Custom API live</span>
+        <span class="step-tag soon" style="margin-left:6px">Shopify, WordPress in V2</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Deploy three files</h3>
+        <p>You get a <code style="font-family:var(--mono);font-size:13px;background:rgba(14,14,14,.07);padding:2px 6px;border-radius:2px">llms.txt</code> site index, clean Markdown pages, and a structured JSON API — ready to upload to your server.</p>
+        <span class="step-tag live">Full output, copy-paste ready</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Stay up to date</h3>
+        <p>As your site changes, regenerate your layer in one click. Managed subscriptions keep the AI-native layer in sync automatically.</p>
+        <span class="step-tag soon">Managed sync — V2</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="audience-section" id="who">
+  <div class="reveal">
+    <span class="section-tag" style="color:rgba(200,73,26,.8)">Who It's For</span>
+    <h2>Built for everyone who owns a website that matters.</h2>
+    <p class="section-sub">Whether you are optimizing for AI search, building for clients, or just want to stay ahead of where the web is going.</p>
+  </div>
+  <div class="audience-grid reveal">
+    <div class="audience-card">
+      <div class="audience-icon">&#9672;</div>
+      <h3>SEO Agencies</h3>
+      <p>Your clients are already asking about AI search optimization. NativeLayer gives you a turnkey technical solution — white-label ready.</p>
+      <ul>
+        <li>Reseller programme with revenue share</li>
+        <li>White-label dashboard for clients</li>
+        <li>Bulk site processing</li>
+        <li>AI citation tracking (V2)</li>
+      </ul>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon">&#11041;</div>
+      <h3>Business Owners</h3>
+      <p>When ChatGPT or Perplexity recommends businesses in your category, you want to be described accurately. NativeLayer makes sure AI agents understand exactly what you do.</p>
+      <ul>
+        <li>No technical knowledge required</li>
+        <li>Works with any website platform</li>
+        <li>One-time setup, managed updates</li>
+        <li>See how AI agents describe you</li>
+      </ul>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon">&#9673;</div>
+      <h3>Developers</h3>
+      <p>Add AI-native infrastructure to every project in 60 seconds. The llms.txt standard is growing fast — get ahead of it now.</p>
+      <ul>
+        <li>API access for programmatic generation</li>
+        <li>CMS and e-commerce integrations (V2)</li>
+        <li>Webhooks for auto-regeneration</li>
+        <li>CLI tool for deployment pipelines</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="waitlist-section" id="waitlist">
+  <div class="reveal">
+    <h2>Get early access.</h2>
+    <p class="section-sub">We are onboarding the first 500 sites personally. Join the waitlist and we will reach out within 48 hours.</p>
+  </div>
+  <div id="waitlistFormWrap" class="reveal">
+    <div class="wl-name-row">
+      <input class="waitlist-input" id="wlName" placeholder="Your name" style="flex:1;min-width:140px"/>
+      <input class="waitlist-input" id="wlUrl" placeholder="Your website URL" style="flex:1;min-width:180px"/>
+    </div>
+    <div class="waitlist-form">
+      <input class="waitlist-input" id="wlEmail" placeholder="your@email.com" type="email"/>
+      <button class="waitlist-btn" id="wlBtn">Join Waitlist</button>
+    </div>
+    <p class="waitlist-note">No spam. No credit card. Just early access.</p>
+  </div>
+  <div class="waitlist-success" id="waitlistSuccess">
+    <span class="check">&#10003;</span>
+    <strong style="font-size:20px;display:block;margin-bottom:8px">You are on the list.</strong>
+    We will be in touch within 48 hours. In the meantime, try the demo above.
+  </div>
+</section>
+
+<section id="faq">
+  <div class="reveal">
+    <span class="section-tag">FAQ</span>
+    <h2>Common questions.</h2>
+  </div>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <button class="faq-q">Does this change my existing website? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">No. NativeLayer generates new files that sit alongside your existing site. Your human visitors see absolutely nothing different. The AI-native layer only exists at background URLs that AI agents know to look for.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Will AI agents actually use these files? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Yes — and adoption is growing rapidly. Perplexity, Claude, and a growing number of AI agents already check for llms.txt. Over 780 sites have adopted it including Cloudflare, Vercel, and Coinbase. AI agent traffic grew 6,900% in 2025 alone.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is my data safe? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">NativeLayer only processes information already publicly visible on your website. We never access private data, customer records, or anything behind a login. Our rule: if a human could find it by browsing your site, it can go in the layer.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How is this different from regular SEO? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Traditional SEO optimizes for search crawlers that rank pages. AI agents work completely differently — they read content in real-time and synthesise responses. NativeLayer is infrastructure for how the AI-driven web works, not a ranking strategy for the old web.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What does it cost? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Early access members get the first 3 months free. After that, plans start at $49/month for small sites. Agency and enterprise plans available with volume discounts and white-label options.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Can I try it without signing up? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Yes — the demo at the top of this page is fully functional. Paste your URL and get a real llms.txt, Markdown pages, and JSON API output you can copy and use right now, for free. No account required.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><em>//</em> NativeLayer</div>
+  <p>&copy; 2026 NativeLayer. Building the AI-native web.</p>
+  <p style="font-size:10px;opacity:.5">hello@nativelayer.io</p>
+</footer>
+
+<script>
+// ── Config — swap BACKEND_URL to your Railway URL when you deploy ─────────────
+var BACKEND_URL = "https://nativelayer-production.up.railway.app";
+
+// ── State ─────────────────────────────────────────────────────────────────────
+var demoResult = null;
+var activeTab  = "llmstxt";
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function escHtml(s) {
+  return (s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function setProgress(step, pct) {
+  document.getElementById("demoOutput").innerHTML =
+    '<div class="demo-progress">'
+    + '<div class="demo-spinner"></div>'
+    + '<div class="demo-step">' + escHtml(step) + '</div>'
+    + '<div class="demo-prog-track"><div class="demo-prog-fill" style="width:' + pct + '%"></div></div>'
+    + '</div>';
+}
+
+function setError(msg) {
+  document.getElementById("demoOutput").innerHTML =
+    '<div class="demo-error">' + escHtml(msg) + '</div>';
+}
+
+// ── Backend calls ─────────────────────────────────────────────────────────────
+async function apiFetch(path, body) {
+  var res = await fetch(BACKEND_URL + path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error("Server error " + res.status);
+  return res.json();
+}
+
+async function fetchPage(url) {
+  var data = await apiFetch("/api/fetch", { url: url });
+  return { text: data.text || "", rawLength: data.rawLength || 0 };
+}
+
+async function generate(prompt, system) {
+  var data = await apiFetch("/api/generate", { prompt: prompt, system: system });
+  return data.text || "";
+}
+
+// ── Demo ──────────────────────────────────────────────────────────────────────
+function renderResult(tab) {
+  if (!demoResult) return;
+  if (tab) activeTab = tab;
+
+  var content = activeTab === "llmstxt"
+    ? escHtml(demoResult.llmstxt)
+    : activeTab === "markdown"
+    ? escHtml(demoResult.markdown)
+    : escHtml(JSON.stringify(demoResult.jsonApi, null, 2));
+
+  document.getElementById("demoOutput").innerHTML =
+    '<div class="demo-tabs">'
+    + '<button class="demo-tab' + (activeTab==="llmstxt" ? " active" : "") + '" id="tab-llmstxt">llms.txt</button>'
+    + '<button class="demo-tab' + (activeTab==="markdown" ? " active" : "") + '" id="tab-markdown">index.md</button>'
+    + '<button class="demo-tab' + (activeTab==="json" ? " active" : "") + '" id="tab-json">site.json</button>'
+    + '<button class="demo-tab" id="tab-copy" style="margin-left:auto;color:rgba(255,255,255,.3)">Copy</button>'
+    + '</div>'
+    + '<pre class="demo-code">' + content + '</pre>'
+    + '<div class="demo-stats">'
+    + '<div class="demo-stat"><div class="demo-stat-num">' + demoResult.savings + '%</div><div class="demo-stat-label">Tokens saved</div></div>'
+    + '<div class="demo-stat"><div class="demo-stat-num">' + demoResult.rawTok.toLocaleString() + '</div><div class="demo-stat-label">Raw tokens</div></div>'
+    + '<div class="demo-stat"><div class="demo-stat-num">' + demoResult.mdTok.toLocaleString() + '</div><div class="demo-stat-label">Optimized</div></div>'
+    + '</div>';
+
+  document.getElementById("tab-llmstxt").addEventListener("click", function(){ renderResult("llmstxt"); });
+  document.getElementById("tab-markdown").addEventListener("click", function(){ renderResult("markdown"); });
+  document.getElementById("tab-json").addEventListener("click",     function(){ renderResult("json"); });
+  document.getElementById("tab-copy").addEventListener("click", function(){
+    var text = activeTab === "llmstxt" ? demoResult.llmstxt : activeTab === "markdown" ? demoResult.markdown : JSON.stringify(demoResult.jsonApi, null, 2);
+    navigator.clipboard.writeText(text);
+    document.getElementById("tab-copy").textContent = "Copied!";
+    setTimeout(function(){ document.getElementById("tab-copy").textContent = "Copy"; }, 2000);
+  });
+}
+
+async function runDemo() {
+  var urlInput = document.getElementById("demoUrl");
+  var btn      = document.getElementById("demoBtn");
+  var url      = urlInput.value.trim();
+  if (!url) { urlInput.focus(); return; }
+  if (!url.startsWith("http")) url = "https://" + url;
+
+  btn.disabled = true;
+  btn.textContent = "Generating...";
+
+  try {
+    setProgress("Fetching website content...", 10);
+    var page   = await fetchPage(url);
+    var text   = page.text;
+    var rawLen = page.rawLength;
+
+    setProgress("Analysing site structure...", 25);
+    var infoRaw = await generate(
+      "Analyse website at " + url + ". Content: " + text.slice(0, 1200) + ". Return JSON only (no fences): {title,description,category,mainTopics:string[]}",
+      "Return only valid JSON, no markdown fences."
+    );
+    var info;
+    try { info = JSON.parse(infoRaw); }
+    catch(e) { info = { title: new URL(url).hostname, description: "A website.", category: "Website", mainTopics: [] }; }
+
+    setProgress("Generating llms.txt...", 45);
+    var llmstxt = await generate(
+      "Generate a complete llms.txt for " + url + ".\nSite: " + JSON.stringify(info) + "\nContent: " + text.slice(0, 600) + "\n\nFormat:\n# [Title]\n> [Tagline]\n\n## About\n[2-3 sentences]\n\n## Key Topics\n- [topic]\n\n## Pages\n- [/path]: [Title] - [Description]\n\n## Notes\n[Guidance for AI agents]",
+      "Output only the llms.txt content, no preamble."
+    );
+
+    setProgress("Building Markdown page...", 65);
+    var markdown = await generate(
+      "Generate a clean Markdown homepage for " + url + ".\nSite: " + JSON.stringify(info) + "\nContent: " + text.slice(0, 800) + "\nOutput 200-250 words of clean Markdown with headings and bullet points. No preamble.",
+      "Output only Markdown content."
+    );
+
+    setProgress("Building JSON API...", 85);
+    var jsonRaw = await generate(
+      "Generate JSON API object for " + url + ".\nSite: " + JSON.stringify(info) + "\nContent: " + text.slice(0, 400) + "\nReturn single JSON object (no fences): {site:{title,description,url,category},navigation:[{path,title,description}],metadata:{generatedAt,format:'ai-native-layer-v1',tokenEstimate},content:{summary,topics:[],keyFacts:[]}}",
+      "Return only valid JSON, no fences."
+    );
+    var jsonApi;
+    try { jsonApi = JSON.parse(jsonRaw); }
+    catch(e) { jsonApi = { site: info, navigation: [], metadata: { generatedAt: new Date().toISOString(), format: "ai-native-layer-v1", tokenEstimate: 480 }, content: { summary: info.description, topics: info.mainTopics, keyFacts: [] } }; }
+
+    var rawTok  = Math.round(rawLen / 4);
+    var mdTok   = Math.round((llmstxt.length + markdown.length) / 4);
+    var savings = Math.max(0, Math.round((1 - mdTok / Math.max(rawTok, 1)) * 100));
+
+    demoResult = { url: url, info: info, llmstxt: llmstxt, markdown: markdown, jsonApi: jsonApi, rawTok: rawTok, mdTok: mdTok, savings: savings };
+    activeTab  = "llmstxt";
+    renderResult();
+
+  } catch(e) {
+    setError("Could not generate layer. Make sure the backend is running and the URL is publicly accessible.");
+    console.error(e);
+  }
+
+  btn.disabled = false;
+  btn.textContent = "Generate \u2192";
+}
+
+// ── Waitlist ──────────────────────────────────────────────────────────────────
+async function submitWaitlist() {
+  var email = document.getElementById("wlEmail").value.trim();
+  var name  = document.getElementById("wlName").value.trim();
+  var url   = document.getElementById("wlUrl").value.trim();
+  if (!email || !email.includes("@")) { document.getElementById("wlEmail").focus(); return; }
+
+  var btn = document.getElementById("wlBtn");
+  btn.disabled = true;
+  btn.textContent = "Joining...";
+
+  try {
+    await apiFetch("/api/waitlist", { email: email, name: name, url: url });
+    document.getElementById("waitlistFormWrap").style.display = "none";
+    document.getElementById("waitlistSuccess").style.display  = "block";
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = "Join Waitlist";
+    alert("Something went wrong. Please try again.");
+  }
+}
+
+// ── FAQ ───────────────────────────────────────────────────────────────────────
+function toggleFaq(item) {
+  var isOpen = item.classList.contains("open");
+  document.querySelectorAll(".faq-item.open").forEach(function(el) { el.classList.remove("open"); });
+  if (!isOpen) item.classList.add("open");
+}
+
+// ── Wire up all events ────────────────────────────────────────────────────────
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("demoBtn").addEventListener("click", runDemo);
+  document.getElementById("demoUrl").addEventListener("keydown", function(e) { if (e.key === "Enter") runDemo(); });
+  document.getElementById("wlBtn").addEventListener("click", submitWaitlist);
+  document.getElementById("wlEmail").addEventListener("keydown", function(e) { if (e.key === "Enter") submitWaitlist(); });
+
+  document.querySelectorAll(".faq-q").forEach(function(btn) {
+    btn.addEventListener("click", function() { toggleFaq(btn.closest(".faq-item")); });
+  });
+
+  // Scroll reveal
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+  document.querySelectorAll(".reveal").forEach(function(el) { observer.observe(el); });
+});
+</script>
+</body>
+</html>
