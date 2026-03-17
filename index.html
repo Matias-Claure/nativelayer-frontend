@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NativeLayer — Make Your Website Invisible to AI</title>
-<meta name="description" content="Generate a complete AI-native layer for any website in 60 seconds. Cut AI agent token costs by 84%."/>
+<title>NativeLayer - Help AI Understand Your Website</title>
+<meta name="description" content="Generate an AI-readable layer for any website. Publish llms.txt, Markdown, and JSON alongside your existing site so AI tools can find the right information faster."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Syne:wght@400;500;600&family=Syne+Mono&display=swap" rel="stylesheet"/>
 <style>
@@ -142,29 +142,29 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.04em}
     <a href="#how">How it works</a>
     <a href="#who">Who it's for</a>
     <a href="#faq">FAQ</a>
-    <a href="#waitlist" class="nav-cta">Join waitlist</a>
+    <a href="#waitlist" class="nav-cta">Get early access</a>
   </div>
 </nav>
 
 <section class="hero">
   <div class="hero-grid"></div>
-  <div class="hero-tag">AI-Native Web Infrastructure</div>
-  <h1>Make your website<br/><span>invisible</span> to AI agents</h1>
-  <p class="hero-sub">AI agents are reading your website right now — inefficiently. NativeLayer generates a lightweight AI-native layer that cuts token costs by 84% and makes every AI agent understand your site perfectly. <strong style="color:var(--accent)">Try the live demo below — paste any URL and see real output in 60 seconds.</strong></p>
+  <div class="hero-tag">AI-Readable Website Layer</div>
+  <h1>Help AI understand your website<br/><span>without rebuilding it</span></h1>
+  <p class="hero-sub">NativeLayer generates a clean AI-readable layer for your site so ChatGPT, Claude, Perplexity, and other AI tools can find the right information without digging through messy frontend code. Publish three files alongside your existing site and keep your current design exactly as it is. <strong style="color:var(--accent)">Try the live demo below and compare prompt tokens before and after.</strong></p>
   <div class="demo-wrap">
     <div class="demo-box">
       <div class="demo-bar">
         <div class="demo-dots"><span></span><span></span><span></span></div>
-        <div class="demo-url-bar">&#9679; live demo — try it free, no account needed</div>
+        <div class="demo-url-bar">&#9679; live demo - compare prompt tokens before and after</div>
       </div>
       <div class="demo-input-row">
         <input class="demo-input" id="demoUrl" placeholder="https://yourwebsite.com" type="url"/>
-        <button class="demo-btn" id="demoBtn">Try free demo &rarr;</button>
+        <button class="demo-btn" id="demoBtn">Generate AI layer &rarr;</button>
       </div>
       <div class="demo-output" id="demoOutput">
         <div class="demo-placeholder">
           <div class="demo-placeholder-icon">{ }</div>
-          <div class="demo-placeholder-text">Paste a URL above and hit Generate</div>
+          <div class="demo-placeholder-text">Paste a URL above and generate your AI layer</div>
         </div>
       </div>
     </div>
@@ -172,38 +172,38 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.04em}
 </section>
 
 <div class="proof-strip">
-  <div class="proof-item"><span class="proof-num">84%</span> avg token reduction</div>
-  <div class="proof-item"><span class="proof-num">60s</span> to generate a full layer</div>
-  <div class="proof-item"><span class="proof-num">3</span> files, instantly deployable</div>
-  <div class="proof-item"><span class="proof-num">6,900%</span> AI agent traffic growth 2025</div>
+  <div class="proof-item"><span class="proof-num">Live</span> before/after prompt comparison</div>
+  <div class="proof-item"><span class="proof-num">3</span> files published alongside your site</div>
+  <div class="proof-item"><span class="proof-num">0</span> rebuild of your existing frontend</div>
+  <div class="proof-item"><span class="proof-num">2.86MB</span> median desktop home page</div>
 </div>
 
 <section class="problem-section" id="problem">
   <div class="reveal">
     <span class="section-tag">The Problem</span>
-    <h2>Your website was built for humans. AI agents are not humans.</h2>
-    <p class="section-sub">Every time an AI agent visits your site, it burns through thousands of tokens parsing JavaScript, CSS, and HTML noise just to find a few hundred tokens of actual content.</p>
+    <h2>Most websites are easy for browsers to render and hard for AI to understand.</h2>
+    <p class="section-sub">AI systems often have to sift through bulky frontend markup before they reach the handful of facts that actually matter. NativeLayer gives them a cleaner path.</p>
   </div>
   <div class="problem-grid reveal">
     <div class="problem-card">
-      <div class="problem-card-label">Typical webpage today</div>
-      <div class="problem-num bad">38,500</div>
-      <p>tokens an AI agent must process to read a standard HTML page — 99% of which is noise: scripts, styles, layout markup, fonts, images.</p>
+      <div class="problem-card-label">Median desktop home page</div>
+      <div class="problem-num bad">2.86<span style="font-size:24px">MB</span></div>
+      <p>The 2025 Web Almanac reported the median desktop home page at 2.86 MB. AI often has to wade through all of that to find the few facts that matter.</p>
     </div>
     <div class="problem-card">
       <div class="problem-card-label">With NativeLayer</div>
-      <div class="problem-num good">500</div>
-      <p>tokens to understand your entire site via a single llms.txt file that AI agents check first, before loading any pages at all.</p>
+      <div class="problem-num good">3<span style="font-size:24px">files</span></div>
+      <p>A compact <code style="font-family:var(--mono);font-size:13px;background:rgba(14,14,14,.07);padding:2px 6px;border-radius:2px">llms.txt</code>, readable Markdown, and structured JSON give AI tools a cleaner input than raw frontend markup.</p>
     </div>
     <div class="problem-card">
-      <div class="problem-card-label">Average page size (2025)</div>
-      <div class="problem-num bad">2.86<span style="font-size:24px">MB</span></div>
-      <p>HTTP Archive 2025 median desktop page. Less than 1% of this is the text content an AI agent actually needs.</p>
+      <div class="problem-card-label">Deployment</div>
+      <div class="problem-num good">0<span style="font-size:24px">rebuild</span></div>
+      <p>Publish the new files alongside your current site. Your frontend, CMS, and visitor experience stay the same.</p>
     </div>
     <div class="problem-card">
-      <div class="problem-card-label">AI agent traffic growth</div>
-      <div class="problem-num good">6,900<span style="font-size:24px">%</span></div>
-      <p>Year-over-year growth in verified AI agent web traffic in 2025. This is happening right now.</p>
+      <div class="problem-card-label">Live proof</div>
+      <div class="problem-num good">Compare</div>
+      <p>Paste any URL into the live demo and see the generated files plus a before-and-after prompt token comparison.</p>
     </div>
   </div>
 </section>
@@ -212,40 +212,39 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.04em}
   <div class="reveal">
     <span class="section-tag">How It Works</span>
     <h2>Three files. Zero changes to your existing site.</h2>
-    <p class="section-sub">NativeLayer generates a parallel AI-native layer alongside your existing website. Human visitors see nothing different. AI agents instantly find exactly what they need.</p>
+    <p class="section-sub">NativeLayer generates an AI-readable layer alongside your existing website. Human visitors see the same site. AI systems get cleaner context.</p>
   </div>
   <div class="steps reveal">
     <div class="step">
       <div class="step-num">01</div>
       <div class="step-content">
         <h3>Paste your URL</h3>
-        <p>We fetch your website, analyse its content and structure, and identify all the information AI agents would want to find. No account needed to try it.</p>
+        <p>We fetch your public website content and identify the information an AI system would need to answer questions about your business, product, or documentation.</p>
         <span class="step-tag live">Live now</span>
       </div>
     </div>
     <div class="step">
       <div class="step-num">02</div>
       <div class="step-content">
-        <h3>Connect your data sources</h3>
-        <p>Optionally connect your RSS feed or any JSON API endpoint. NativeLayer fetches real data and weaves it into the generated layer so AI agents see your actual content.</p>
-        <span class="step-tag live">RSS + Custom API live</span>
-        <span class="step-tag soon" style="margin-left:6px">Shopify, WordPress in V2</span>
+        <h3>Generate your AI layer</h3>
+        <p>We create three outputs: <code style="font-family:var(--mono);font-size:13px;background:rgba(14,14,14,.07);padding:2px 6px;border-radius:2px">llms.txt</code> for site guidance, Markdown for readable context, and JSON for structured data.</p>
+        <span class="step-tag live">Generated in the demo</span>
       </div>
     </div>
     <div class="step">
       <div class="step-num">03</div>
       <div class="step-content">
-        <h3>Deploy three files</h3>
-        <p>You get a <code style="font-family:var(--mono);font-size:13px;background:rgba(14,14,14,.07);padding:2px 6px;border-radius:2px">llms.txt</code> site index, clean Markdown pages, and a structured JSON API — ready to upload to your server.</p>
-        <span class="step-tag live">Full output, copy-paste ready</span>
+        <h3>Publish alongside your site</h3>
+        <p>Upload the files at predictable URLs without changing your frontend, redesigning your pages, or moving to a new CMS.</p>
+        <span class="step-tag live">Copy-paste ready</span>
       </div>
     </div>
     <div class="step">
       <div class="step-num">04</div>
       <div class="step-content">
-        <h3>Stay up to date</h3>
-        <p>As your site changes, regenerate your layer in one click. Managed subscriptions keep the AI-native layer in sync automatically.</p>
-        <span class="step-tag soon">Managed sync — V2</span>
+        <h3>Keep it fresh</h3>
+        <p>Regenerate your layer as your site changes, or use managed updates when that workflow is available.</p>
+        <span class="step-tag soon">Managed updates - soon</span>
       </div>
     </div>
   </div>
@@ -254,41 +253,41 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.04em}
 <section class="audience-section" id="who">
   <div class="reveal">
     <span class="section-tag" style="color:rgba(200,73,26,.8)">Who It's For</span>
-    <h2>Built for everyone who owns a website that matters.</h2>
-    <p class="section-sub">Whether you are optimizing for AI search, building for clients, or just want to stay ahead of where the web is going.</p>
+    <h2>Built for teams that care how AI describes them.</h2>
+    <p class="section-sub">Whether you run client sites, operate your own business, or ship products on the web, NativeLayer gives AI systems a cleaner source of truth.</p>
   </div>
   <div class="audience-grid reveal">
     <div class="audience-card">
       <div class="audience-icon">&#9672;</div>
       <h3>SEO Agencies</h3>
-      <p>Your clients are already asking about AI search optimization. NativeLayer gives you a turnkey technical solution — white-label ready.</p>
+      <p>Turn AI readiness into a client deliverable. Give every site a cleaner machine-readable layer without rebuilding each frontend.</p>
       <ul>
-        <li>Reseller programme with revenue share</li>
-        <li>White-label dashboard for clients</li>
-        <li>Bulk site processing</li>
-        <li>AI citation tracking (V2)</li>
+        <li>White-label service offering</li>
+        <li>Fast audits and delivery</li>
+        <li>Works across custom sites and CMSs</li>
+        <li>Managed refreshes on the roadmap</li>
       </ul>
     </div>
     <div class="audience-card">
       <div class="audience-icon">&#11041;</div>
       <h3>Business Owners</h3>
-      <p>When ChatGPT or Perplexity recommends businesses in your category, you want to be described accurately. NativeLayer makes sure AI agents understand exactly what you do.</p>
+      <p>Give AI tools a clearer picture of what you do, what you sell, and which pages matter most without changing the site you already have.</p>
       <ul>
-        <li>No technical knowledge required</li>
-        <li>Works with any website platform</li>
-        <li>One-time setup, managed updates</li>
-        <li>See how AI agents describe you</li>
+        <li>No rebuild of your current site</li>
+        <li>Works with most public websites</li>
+        <li>Clearer business and product context</li>
+        <li>Simple files you can publish fast</li>
       </ul>
     </div>
     <div class="audience-card">
       <div class="audience-icon">&#9673;</div>
       <h3>Developers</h3>
-      <p>Add AI-native infrastructure to every project in 60 seconds. The llms.txt standard is growing fast — get ahead of it now.</p>
+      <p>Ship a machine-readable layer in minutes instead of redesigning your whole frontend for crawlers, assistants, and retrieval systems.</p>
       <ul>
-        <li>API access for programmatic generation</li>
-        <li>CMS and e-commerce integrations (V2)</li>
-        <li>Webhooks for auto-regeneration</li>
-        <li>CLI tool for deployment pipelines</li>
+        <li>Three deployable files</li>
+        <li>Structured Markdown and JSON output</li>
+        <li>Fits existing hosting and deployment flows</li>
+        <li>Useful for docs, marketing sites, and apps</li>
       </ul>
     </div>
   </div>
@@ -296,8 +295,8 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.04em}
 
 <section class="waitlist-section" id="waitlist">
   <div class="reveal">
-    <h2>Get early access.</h2>
-    <p class="section-sub">We are onboarding the first 500 sites personally. Join the waitlist and we will reach out within 48 hours.</p>
+    <h2>Want managed setup and updates?</h2>
+    <p class="section-sub">Join the waitlist for hands-on onboarding, recurring refreshes, and early agency pricing as managed plans roll out.</p>
   </div>
   <div id="waitlistFormWrap" class="reveal">
     <div class="wl-name-row">
@@ -308,12 +307,12 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.04em}
       <input class="waitlist-input" id="wlEmail" placeholder="your@email.com" type="email"/>
       <button class="waitlist-btn" id="wlBtn">Join Waitlist</button>
     </div>
-    <p class="waitlist-note">No spam. No credit card. Just early access.</p>
+    <p class="waitlist-note">No spam. No credit card. Just launch updates and early access.</p>
   </div>
   <div class="waitlist-success" id="waitlistSuccess">
     <span class="check">&#10003;</span>
     <strong style="font-size:20px;display:block;margin-bottom:8px">You are on the list.</strong>
-    We will be in touch within 48 hours. In the meantime, try the demo above.
+    We will be in touch as early access opens. In the meantime, run the live demo above.
   </div>
 </section>
 
@@ -325,34 +324,38 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.04em}
   <div class="faq-list reveal">
     <div class="faq-item">
       <button class="faq-q">Does this change my existing website? <span class="faq-arrow">+</span></button>
-      <div class="faq-a">No. NativeLayer generates new files that sit alongside your existing site. Your human visitors see absolutely nothing different. The AI-native layer only exists at background URLs that AI agents know to look for.</div>
+      <div class="faq-a">No. NativeLayer adds machine-readable files alongside your current site. Your frontend and visitor experience stay the same.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-q">Will AI agents actually use these files? <span class="faq-arrow">+</span></button>
-      <div class="faq-a">Yes — and adoption is growing rapidly. Perplexity, Claude, and a growing number of AI agents already check for llms.txt. Over 780 sites have adopted it including Cloudflare, Vercel, and Coinbase. AI agent traffic grew 6,900% in 2025 alone.</div>
+      <button class="faq-q">What files do I get? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">You get a root-level <code style="font-family:var(--mono);font-size:13px;background:rgba(14,14,14,.07);padding:2px 6px;border-radius:2px">llms.txt</code>, a readable Markdown page, and structured JSON that AI systems and internal tools can consume more easily than raw frontend code.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Will AI tools actually use these files? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">Many AI systems can make use of cleaner, structured inputs when they are available. Adoption differs by tool today, but the core benefit is straightforward: these files give AI a simpler source of truth than raw HTML and JavaScript.</div>
     </div>
     <div class="faq-item">
       <button class="faq-q">Is my data safe? <span class="faq-arrow">+</span></button>
-      <div class="faq-a">NativeLayer only processes information already publicly visible on your website. We never access private data, customer records, or anything behind a login. Our rule: if a human could find it by browsing your site, it can go in the layer.</div>
+      <div class="faq-a">NativeLayer works from content that is already public on your site. It is meant for information you want AI systems and customers to understand, not private or behind-login data.</div>
     </div>
     <div class="faq-item">
       <button class="faq-q">How is this different from regular SEO? <span class="faq-arrow">+</span></button>
-      <div class="faq-a">Traditional SEO optimizes for search crawlers that rank pages. AI agents work completely differently — they read content in real-time and synthesise responses. NativeLayer is infrastructure for how the AI-driven web works, not a ranking strategy for the old web.</div>
+      <div class="faq-a">SEO helps search engines rank pages. NativeLayer helps AI systems understand your content once they are reading it by giving them a cleaner, machine-readable layer.</div>
     </div>
     <div class="faq-item">
-      <button class="faq-q">What does it cost? <span class="faq-arrow">+</span></button>
-      <div class="faq-a">Early access members get the first 3 months free. After that, plans start at $49/month for small sites. Agency and enterprise plans available with volume discounts and white-label options.</div>
+      <button class="faq-q">How much does it cost? <span class="faq-arrow">+</span></button>
+      <div class="faq-a">The live demo is free. Managed plans, agency workflows, and automated refreshes are being rolled out through early access.</div>
     </div>
     <div class="faq-item">
       <button class="faq-q">Can I try it without signing up? <span class="faq-arrow">+</span></button>
-      <div class="faq-a">Yes — the demo at the top of this page is fully functional. Paste your URL and get a real llms.txt, Markdown pages, and JSON API output you can copy and use right now, for free. No account required.</div>
+      <div class="faq-a">Yes. Paste a URL into the demo and generate a real llms.txt, Markdown page, and JSON output immediately. No account required.</div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="footer-logo"><em>//</em> NativeLayer</div>
-  <p>&copy; 2026 NativeLayer. Building the AI-native web.</p>
+  <p>&copy; 2026 NativeLayer. Building the AI-readable web.</p>
   <p style="font-size:10px;opacity:.5">hello@nativelayer.io</p>
 </footer>
 
@@ -396,12 +399,26 @@ async function apiFetch(path, body) {
 
 async function fetchPage(url) {
   var data = await apiFetch("/api/fetch", { url: url });
-  return { text: data.text || "", rawLength: data.rawLength || 0 };
+  return {
+    text: data.text || "",
+    beforePromptTokens: data.beforePromptTokens || 0,
+    tokenizerModel: data.tokenizerModel || ""
+  };
 }
 
 async function generate(prompt, system) {
   var data = await apiFetch("/api/generate", { prompt: prompt, system: system });
   return data.text || "";
+}
+
+async function countPromptTokens(url, beforePromptTokens, llmstxt, markdown, jsonApi) {
+  return apiFetch("/api/tokens", {
+    url: url,
+    beforePromptTokens: beforePromptTokens,
+    llmstxt: llmstxt,
+    markdown: markdown,
+    jsonApi: jsonApi
+  });
 }
 
 // ── Demo ──────────────────────────────────────────────────────────────────────
@@ -424,9 +441,9 @@ function renderResult(tab) {
     + '</div>'
     + '<pre class="demo-code">' + content + '</pre>'
     + '<div class="demo-stats">'
-    + '<div class="demo-stat"><div class="demo-stat-num">' + demoResult.savings + '%</div><div class="demo-stat-label">Tokens saved</div></div>'
-    + '<div class="demo-stat"><div class="demo-stat-num">' + demoResult.rawTok.toLocaleString() + '</div><div class="demo-stat-label">Raw tokens</div></div>'
-    + '<div class="demo-stat"><div class="demo-stat-num">' + demoResult.mdTok.toLocaleString() + '</div><div class="demo-stat-label">Optimized</div></div>'
+    + '<div class="demo-stat"><div class="demo-stat-num">' + demoResult.savings + '%</div><div class="demo-stat-label">Prompt tokens saved</div></div>'
+    + '<div class="demo-stat"><div class="demo-stat-num">' + demoResult.beforeTok.toLocaleString() + '</div><div class="demo-stat-label">Prompt before</div></div>'
+    + '<div class="demo-stat"><div class="demo-stat-num">' + demoResult.afterTok.toLocaleString() + '</div><div class="demo-stat-label">Prompt with layer</div></div>'
     + '</div>';
 
   document.getElementById("tab-llmstxt").addEventListener("click", function(){ renderResult("llmstxt"); });
@@ -452,11 +469,12 @@ async function runDemo() {
 
   try {
     setProgress("Fetching website content...", 10);
-    var page   = await fetchPage(url);
-    var text   = page.text;
-    var rawLen = page.rawLength;
+    var page               = await fetchPage(url);
+    var text               = page.text;
+    var beforePromptTokens = page.beforePromptTokens;
+    var tokenizerModel     = page.tokenizerModel;
 
-    setProgress("Analysing site structure...", 25);
+    setProgress("Analyzing site structure...", 25);
     var infoRaw = await generate(
       "Analyse website at " + url + ". Content: " + text.slice(0, 1200) + ". Return JSON only (no fences): {title,description,category,mainTopics:string[]}",
       "Return only valid JSON, no markdown fences."
@@ -486,11 +504,20 @@ async function runDemo() {
     try { jsonApi = JSON.parse(jsonRaw); }
     catch(e) { jsonApi = { site: info, navigation: [], metadata: { generatedAt: new Date().toISOString(), format: "ai-native-layer-v1", tokenEstimate: 480 }, content: { summary: info.description, topics: info.mainTopics, keyFacts: [] } }; }
 
-    var rawTok  = Math.round(rawLen / 4);
-    var mdTok   = Math.round((llmstxt.length + markdown.length) / 4);
-    var savings = Math.max(0, Math.round((1 - mdTok / Math.max(rawTok, 1)) * 100));
+    setProgress("Counting real prompt tokens...", 95);
+    var tokenStats = await countPromptTokens(url, beforePromptTokens, llmstxt, markdown, jsonApi);
 
-    demoResult = { url: url, info: info, llmstxt: llmstxt, markdown: markdown, jsonApi: jsonApi, rawTok: rawTok, mdTok: mdTok, savings: savings };
+    demoResult = {
+      url: url,
+      info: info,
+      llmstxt: llmstxt,
+      markdown: markdown,
+      jsonApi: jsonApi,
+      beforeTok: tokenStats.beforePromptTokens || 0,
+      afterTok: tokenStats.afterPromptTokens || 0,
+      savings: tokenStats.savings || 0,
+      tokenizerModel: tokenStats.model || tokenizerModel
+    };
     activeTab  = "llmstxt";
     renderResult();
 
