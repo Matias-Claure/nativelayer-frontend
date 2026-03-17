@@ -360,16 +360,93 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.04em}
 </footer>
 
 <script>
-// ── Config — swap BACKEND_URL to your Railway URL when you deploy ─────────────
+// ── Config — point BACKEND_URL at the deployed backend that handles fetch/generate ──
 var BACKEND_URL = "https://nativelayer-backend.vercel.app";
 
 // ── State ─────────────────────────────────────────────────────────────────────
 var demoResult = null;
 var activeTab  = "llmstxt";
+var tokenizerPromise = null;
+
+var TOKENIZER_MODEL = "gpt-4.1-mini";
+var PROMPT_SYSTEM =
+  "You answer questions about a website using only the supplied source material. " +
+  "Be precise, surface the main offerings and key pages, and do not invent details that are not present.";
+var PROMPT_TASK =
+  "Summarize what this website does, who it serves, its key offerings, and the main pages or resources an AI agent should know about.";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function escHtml(s) {
   return (s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function buildBeforeMessages(url, sourceText) {
+  return [
+    { role: "system", content: PROMPT_SYSTEM },
+    {
+      role: "user",
+      content:
+        "Website URL: " + url + "\n" +
+        "Task: " + PROMPT_TASK + "\n" +
+        "Source format: Extracted website text\n\n" +
+        "Website content:\n" +
+        sourceText
+    }
+  ];
+}
+
+function buildAfterMessages(url, llmstxt, markdown, jsonApi) {
+  return [
+    { role: "system", content: PROMPT_SYSTEM },
+    {
+      role: "user",
+      content:
+        "Website URL: " + url + "\n" +
+        "Task: " + PROMPT_TASK + "\n" +
+        "Source format: AI-readable layer\n\n" +
+        "llms.txt\n" +
+        llmstxt + "\n\n" +
+        "index.md\n" +
+        markdown + "\n\n" +
+        "site.json\n" +
+        JSON.stringify(jsonApi, null, 2)
+    }
+  ];
+}
+
+function calculateSavings(beforePromptTokens, afterPromptTokens) {
+  return Math.max(0, Math.round(((beforePromptTokens - afterPromptTokens) / Math.max(beforePromptTokens, 1)) * 100));
+}
+
+async function getTokenizer() {
+  if (window.GPTTokenizer_o200k_base) return window.GPTTokenizer_o200k_base;
+  if (!tokenizerPromise) {
+    tokenizerPromise = new Promise(function(resolve, reject) {
+      var script = document.createElement("script");
+      script.src = "https://unpkg.com/gpt-tokenizer/dist/o200k_base.js";
+      script.async = true;
+      script.onload = function() {
+        if (window.GPTTokenizer_o200k_base) resolve(window.GPTTokenizer_o200k_base);
+        else reject(new Error("Tokenizer loaded but global was unavailable."));
+      };
+      script.onerror = function() {
+        reject(new Error("Could not load tokenizer script."));
+      };
+      document.head.appendChild(script);
+    });
+  }
+  return tokenizerPromise;
+}
+
+async function countPromptTokens(messages) {
+  var tokenizer = await getTokenizer();
+  if (typeof tokenizer.countChatCompletionTokens === "function") {
+    return tokenizer.countChatCompletionTokens({
+      model: TOKENIZER_MODEL,
+      messages: messages
+    });
+  }
+  return tokenizer.encodeChat(messages, TOKENIZER_MODEL).length;
 }
 
 function setProgress(step, pct) {
@@ -401,6 +478,7 @@ async function fetchPage(url) {
   var data = await apiFetch("/api/fetch", { url: url });
   return {
     text: data.text || "",
+    rawLength: data.rawLength || 0,
     beforePromptTokens: data.beforePromptTokens || 0,
     tokenizerModel: data.tokenizerModel || ""
   };
@@ -409,16 +487,6 @@ async function fetchPage(url) {
 async function generate(prompt, system) {
   var data = await apiFetch("/api/generate", { prompt: prompt, system: system });
   return data.text || "";
-}
-
-async function countPromptTokens(url, beforePromptTokens, llmstxt, markdown, jsonApi) {
-  return apiFetch("/api/tokens", {
-    url: url,
-    beforePromptTokens: beforePromptTokens,
-    llmstxt: llmstxt,
-    markdown: markdown,
-    jsonApi: jsonApi
-  });
 }
 
 // ── Demo ──────────────────────────────────────────────────────────────────────
@@ -471,6 +539,7 @@ async function runDemo() {
     setProgress("Fetching website content...", 10);
     var page               = await fetchPage(url);
     var text               = page.text;
+    var rawLength          = page.rawLength;
     var beforePromptTokens = page.beforePromptTokens;
     var tokenizerModel     = page.tokenizerModel;
 
@@ -505,7 +574,11 @@ async function runDemo() {
     catch(e) { jsonApi = { site: info, navigation: [], metadata: { generatedAt: new Date().toISOString(), format: "ai-native-layer-v1", tokenEstimate: 480 }, content: { summary: info.description, topics: info.mainTopics, keyFacts: [] } }; }
 
     setProgress("Counting real prompt tokens...", 95);
-    var tokenStats = await countPromptTokens(url, beforePromptTokens, llmstxt, markdown, jsonApi);
+    var beforeTok = beforePromptTokens > 0
+      ? beforePromptTokens
+      : await countPromptTokens(buildBeforeMessages(url, text));
+    var afterTok = await countPromptTokens(buildAfterMessages(url, llmstxt, markdown, jsonApi));
+    var savings = calculateSavings(beforeTok, afterTok);
 
     demoResult = {
       url: url,
@@ -513,10 +586,10 @@ async function runDemo() {
       llmstxt: llmstxt,
       markdown: markdown,
       jsonApi: jsonApi,
-      beforeTok: tokenStats.beforePromptTokens || 0,
-      afterTok: tokenStats.afterPromptTokens || 0,
-      savings: tokenStats.savings || 0,
-      tokenizerModel: tokenStats.model || tokenizerModel
+      beforeTok: beforeTok || Math.round(rawLength / 4),
+      afterTok: afterTok || 0,
+      savings: savings || 0,
+      tokenizerModel: tokenizerModel || TOKENIZER_MODEL
     };
     activeTab  = "llmstxt";
     renderResult();
