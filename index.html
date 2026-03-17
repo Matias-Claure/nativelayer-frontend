@@ -418,6 +418,18 @@ function calculateSavings(beforePromptTokens, afterPromptTokens) {
   return Math.max(0, Math.round(((beforePromptTokens - afterPromptTokens) / Math.max(beforePromptTokens, 1)) * 100));
 }
 
+async function getBeforePromptTokens(url, sourceText, rawLength, exactBeforePromptTokens) {
+  if (exactBeforePromptTokens > 0) return exactBeforePromptTokens;
+
+  var extractedPromptTokens = await countPromptTokens(buildBeforeMessages(url, sourceText));
+  if (!rawLength || !sourceText.length || rawLength <= sourceText.length) return extractedPromptTokens;
+
+  // If the backend cannot return exact raw-HTML prompt tokens yet, scale the
+  // extracted-text prompt by the page's raw-size inflation to avoid comparing
+  // the AI layer against an already-compressed baseline.
+  return Math.round(extractedPromptTokens * (rawLength / sourceText.length));
+}
+
 async function getTokenizer() {
   if (window.GPTTokenizer_o200k_base) return window.GPTTokenizer_o200k_base;
   if (!tokenizerPromise) {
@@ -574,9 +586,7 @@ async function runDemo() {
     catch(e) { jsonApi = { site: info, navigation: [], metadata: { generatedAt: new Date().toISOString(), format: "ai-native-layer-v1", tokenEstimate: 480 }, content: { summary: info.description, topics: info.mainTopics, keyFacts: [] } }; }
 
     setProgress("Counting real prompt tokens...", 95);
-    var beforeTok = beforePromptTokens > 0
-      ? beforePromptTokens
-      : await countPromptTokens(buildBeforeMessages(url, text));
+    var beforeTok = await getBeforePromptTokens(url, text, rawLength, beforePromptTokens);
     var afterTok = await countPromptTokens(buildAfterMessages(url, llmstxt, markdown, jsonApi));
     var savings = calculateSavings(beforeTok, afterTok);
 
